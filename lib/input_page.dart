@@ -33,35 +33,27 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.MALE;
-                      });
+                  child: ReusableCard(
+                    onPress: () {
+                      selectedGender = Gender.MALE;
                     },
-                    child: ReusableCard(
-                      color: (selectedGender == Gender.MALE
-                          ? activeCardColor
-                          : inActiveCardColor),
-                      cardChild: IconContent(
-                          icon: FontAwesomeIcons.mars, label: 'MALE'),
-                    ),
+                    color: (selectedGender == Gender.MALE
+                        ? activeCardColor
+                        : inActiveCardColor),
+                    cardChild:
+                        IconContent(icon: FontAwesomeIcons.mars, label: 'MALE'),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.FEMALE;
-                      });
+                  child: ReusableCard(
+                    onPress: () {
+                      selectedGender = Gender.FEMALE;
                     },
-                    child: ReusableCard(
-                      color: (selectedGender == Gender.FEMALE
-                          ? activeCardColor
-                          : inActiveCardColor),
-                      cardChild: IconContent(
-                          icon: FontAwesomeIcons.venus, label: 'FEMALE'),
-                    ),
+                    color: (selectedGender == Gender.FEMALE
+                        ? activeCardColor
+                        : inActiveCardColor),
+                    cardChild: IconContent(
+                        icon: FontAwesomeIcons.venus, label: 'FEMALE'),
                   ),
                 ),
               ],
@@ -97,17 +89,22 @@ class _InputPageState extends State<InputPage> {
 class ReusableCard extends StatelessWidget {
   final Color color;
   final Widget cardChild;
-  ReusableCard({@required this.color, this.cardChild});
+  final Function onPress;
+
+  ReusableCard({@required this.color, this.cardChild, this.onPress});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      child: cardChild,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: this.color,
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        child: cardChild,
+        margin: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: this.color,
+        ),
       ),
     );
   }
