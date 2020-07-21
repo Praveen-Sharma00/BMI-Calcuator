@@ -2,6 +2,7 @@ import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'constants.dart';
 import 'icon_content.dart';
 
 enum Gender { MALE, FEMALE }
@@ -24,6 +25,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -31,7 +33,9 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {
-                      selectedGender = Gender.MALE;
+                      setState(() {
+                        selectedGender = Gender.MALE;
+                      });
                     },
                     color: (selectedGender == Gender.MALE
                         ? kActiveCardColor
@@ -43,7 +47,9 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {
-                      selectedGender = Gender.FEMALE;
+                      setState(() {
+                        selectedGender = Gender.FEMALE;
+                      });
                     },
                     color: (selectedGender == Gender.FEMALE
                         ? kActiveCardColor
@@ -63,7 +69,10 @@ class _InputPageState extends State<InputPage> {
                   Text(
                     'HEIGHT',
                     style: labelTextStyle,
-                  )
+                  ),
+                  Row(
+                    children: <Widget>[Text('180')],
+                  ),
                 ],
               ),
             ),
