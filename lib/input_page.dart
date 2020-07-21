@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'bottom_button.dart';
+import 'calculator.dart';
 import 'constants.dart';
 import 'icon_content.dart';
 import 'results_page.dart';
@@ -25,6 +26,7 @@ class _InputPageState extends State<InputPage> {
   int height = 140;
   int weight = 60;
   int age = 15;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,8 +214,15 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             buttonTitle: 'CALCULATE',
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ResultsPage()));
+              Calculator report = Calculator(height: height, weight: weight);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultsPage(
+                            bmiResult: report.calculateBMI(),
+                            resultText: report.getResult(),
+                            interpretation: report.getInterpretation(),
+                          )));
             },
           ),
         ],
