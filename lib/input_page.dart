@@ -1,12 +1,8 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'icon_content.dart';
-
-const bottomContainerHeight = 60.0;
-const inActiveCardColor = Color(0xFF111328);
-const activeCardColor = Color(0xFF1D1E33);
-const bottomContainerColor = Color(0xFFEB1555);
 
 enum Gender { MALE, FEMALE }
 
@@ -16,8 +12,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inActiveCardColor;
-  Color femaleCardColor = inActiveCardColor;
+  Color maleCardColor = kInActiveCardColor;
+  Color femaleCardColor = kInActiveCardColor;
 
   Gender selectedGender;
 
@@ -38,8 +34,8 @@ class _InputPageState extends State<InputPage> {
                       selectedGender = Gender.MALE;
                     },
                     color: (selectedGender == Gender.MALE
-                        ? activeCardColor
-                        : inActiveCardColor),
+                        ? kActiveCardColor
+                        : kInActiveCardColor),
                     cardChild:
                         IconContent(icon: FontAwesomeIcons.mars, label: 'MALE'),
                   ),
@@ -50,8 +46,8 @@ class _InputPageState extends State<InputPage> {
                       selectedGender = Gender.FEMALE;
                     },
                     color: (selectedGender == Gender.FEMALE
-                        ? activeCardColor
-                        : inActiveCardColor),
+                        ? kActiveCardColor
+                        : kInActiveCardColor),
                     cardChild: IconContent(
                         icon: FontAwesomeIcons.venus, label: 'FEMALE'),
                   ),
@@ -60,25 +56,35 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: ReusableCard(color: activeCardColor),
+            child: ReusableCard(
+              color: kActiveCardColor,
+              cardChild: Column(
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: labelTextStyle,
+                  )
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(color: kActiveCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(color: activeCardColor),
+                  child: ReusableCard(color: kActiveCardColor),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: kBottomContainerColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           ),
         ],
       ),
